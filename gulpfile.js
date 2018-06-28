@@ -70,3 +70,4 @@ gulp.task("connect", done => {
 
 gulp.task("default", gulp.series("clean", gulp.parallel("scripts", "styles", "html", "images", "connect", "watch")))
 
+gulp.task("build", gulp.series("default"))
