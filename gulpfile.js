@@ -11,9 +11,10 @@ const gulp       = require("gulp"),
 
 gulp.task("styles", done => {
     gulp.src("src/sass/**/*.scss")
-        .pipe(sourcemaps.init())
         .pipe(scss({outputStyle: "compressed"}).on("error", scss.logError))
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.init())
+        .pipe(concat('all.min.css'))
+        .pipe(sourcemaps.write("/"))
         .pipe(gulp.dest("dist/css"))
         .pipe(connect.reload())
     done()
@@ -21,8 +22,10 @@ gulp.task("styles", done => {
 
 gulp.task("scripts", done => {
     gulp.src("src/js/**/*.js")
-        .pipe(concat("global.js"))
+        .pipe(sourcemaps.init())
+        .pipe(concat("all.min.js"))
         .pipe(uglify())
+        .pipe(sourcemaps.write("/"))
         .pipe(gulp.dest("dist/js"))
         .pipe(connect.reload())
     done()
